@@ -13,7 +13,7 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "FontosCapacitorBrowser.podspec"
+    "FontossolucoesFontosCapacitorBrowser.podspec"
   ],
   "author": "Fontos Soluções <fontos@fontos.com.br>",
   "license": "MIT",
@@ -49,7 +49,7 @@
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "publish:cocoapod": "pod trunk push ./FontosCapacitorBrowser.podspec --allow-warnings"
+    "publish:cocoapod": "pod trunk push FontossolucoesFontosCapacitorBrowser.podspec --allow-warnings"
   },
   "devDependencies": {
     "@capacitor/android": "^6.0.0",
