@@ -38,10 +38,18 @@ import SafariServices
         safariViewController = nil
     }
 
+    public func safariViewController(_ controller: SFSafariViewController,initialLoadDidRedirectTo URL: URL){
+    print("safariViewController_initialLoadDidRedirectTo: '\(URL)'")
+    }
+
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
     print("safariViewControllerDidFinish")
         browserEventDidOccur?(.finished)
         safariViewController = nil
+    }
+
+    public func safariViewController(_ controller: SFSafariViewController,activityItemsFor URL: URL,title: String?){
+    print("safariViewController_activityItemsFor: '\(URL)' '\(title)' \(activityItemsFor) ")
     }
 
     public func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
