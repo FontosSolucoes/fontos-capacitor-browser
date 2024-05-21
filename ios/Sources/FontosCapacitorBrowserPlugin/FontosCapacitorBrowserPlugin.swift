@@ -28,8 +28,12 @@ public class FontosCapacitorBrowserPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Unable to display URL")
             return
         }
-        implementation.browserEventDidOccur = { [weak self] (event) in
-            self?.notifyListeners(event.listenerEvent, data: nil)
+        implementation.browserEventDidOccur = { [weak self] (event, dataToSend: String?) in
+            if let strToSend = dataToSend, !strToSend.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                self?.notifyListeners(event.listenerEvent, data: ["url": strToSend])
+            } else {
+                self?.notifyListeners(event.listenerEvent, data: nil)
+            }
         }
         // display
         DispatchQueue.main.async { [weak self] in
@@ -74,6 +78,8 @@ private extension BrowserEvent {
             return "fontosBrowserPageLoaded"
         case .finished:
             return "fontosBrowserFinished"
+        case .loggedIn:
+            return "fontosBrowserLoggedIn"
         }
     }
 }

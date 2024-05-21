@@ -4,11 +4,12 @@ import SafariServices
 @objc public enum BrowserEvent: Int {
     case loaded
     case finished
+    case loggedIn
 }
 
 @objc public class Browser: NSObject, SFSafariViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     private var safariViewController: SFSafariViewController?
-    public typealias BrowserEventCallback = (BrowserEvent) -> Void
+    public typealias BrowserEventCallback = (BrowserEvent, String) -> Void
 
     @objc public var browserEventDidOccur: BrowserEventCallback?
     @objc var viewController: UIViewController? {
@@ -39,31 +40,43 @@ import SafariServices
     }
 
     public func safariViewController(_ controller: SFSafariViewController,initialLoadDidRedirectTo URL: URL){
-    print("safariViewController_initialLoadDidRedirectTo: '\(URL)'")
+
+           let urlString = URL.absoluteString
+           let containsLoginGoogle = urlString.contains("login-social-google-redirect")
+           let containsLoginApple = urlString.contains("login-social-apple-redirect")
+           let containsLoginMicrosoft = urlString.contains("login-social-microsoft-redirect")
+           if containsLoginGoogle {
+               browserEventDidOccur?(.loggedIn, urlString)
+               controller.dismiss(animated: true, completion: nil)
+           } else if containsLoginApple {
+               browserEventDidOccur?(.loggedIn, urlString)
+               controller.dismiss(animated: true, completion: nil)
+           } else if containsLoginMicrosoft {
+               browserEventDidOccur?(.loggedIn, urlString)
+               controller.dismiss(animated: true, completion: nil)
+           }
     }
 
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-    print("safariViewControllerDidFinish")
-        browserEventDidOccur?(.finished)
+        browserEventDidOccur?(.finished, "")
         safariViewController = nil
     }
 
-    public func safariViewController(_ controller: SFSafariViewController,activityItemsFor URL: URL,title: String?){
-    print("safariViewController_activityItemsFor: '\(URL)' '\(title)' \(activityItemsFor) ")
+    public func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
+        return []
     }
 
     public func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
-        print("safariViewController_didLoadSuccessfully: \(didLoadSuccessfully)")
-        browserEventDidOccur?(.loaded)
+        browserEventDidOccur?(.loaded, "")
     }
 
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        browserEventDidOccur?(.finished)
+        browserEventDidOccur?(.finished, "")
         safariViewController = nil
     }
 
     public func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        browserEventDidOccur?(.finished)
+        browserEventDidOccur?(.finished, "")
         safariViewController = nil
     }
 }

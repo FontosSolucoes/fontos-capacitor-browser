@@ -37,6 +37,7 @@ const openCapacitorSite = async () => {
 * [`close()`](#close)
 * [`addListener('fontosBrowserFinished', ...)`](#addlistenerfontosbrowserfinished-)
 * [`addListener('fontosBrowserPageLoaded', ...)`](#addlistenerfontosbrowserpageloaded-)
+* [`addListener('fontosBrowserLoggedIn', ...)`](#addlistenerfontosbrowserloggedin-)
 * [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
 
@@ -48,14 +49,14 @@ const openCapacitorSite = async () => {
 ### open(...)
 
 ```typescript
-open(options: OpenOptions) => Promise<void>
+open(options: FtsCapacitorBrowserOpenOptions) => Promise<void>
 ```
 
 Open a page with the specified options.
 
-| Param         | Type                                                |
-| ------------- | --------------------------------------------------- |
-| **`options`** | <code><a href="#openoptions">OpenOptions</a></code> |
+| Param         | Type                                                                                      |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#ftscapacitorbrowseropenoptions">FtsCapacitorBrowserOpenOptions</a></code> |
 
 **Since:** 1.0.0
 
@@ -120,6 +121,27 @@ It is not invoked for any subsequent page loads.
 --------------------
 
 
+### addListener('fontosBrowserLoggedIn', ...)
+
+```typescript
+addListener(eventName: 'fontosBrowserLoggedIn', listenerFunc: (ftsDataReturn: FtsCapacitorBrowserReturnOptions) => void) => Promise<PluginListenerHandle>
+```
+
+Android & iOS only: Listen for the url loaded.
+It's fired when the URL from the server is from a redirect-login success
+
+| Param              | Type                                                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'fontosBrowserLoggedIn'</code>                                                                                      |
+| **`listenerFunc`** | <code>(ftsDataReturn: <a href="#ftscapacitorbrowserreturnoptions">FtsCapacitorBrowserReturnOptions</a>) =&gt; void</code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+**Since:** 1.0.0
+
+--------------------
+
+
 ### removeAllListeners()
 
 ```typescript
@@ -136,7 +158,7 @@ Remove all native listeners for this plugin.
 ### Interfaces
 
 
-#### OpenOptions
+#### FtsCapacitorBrowserOpenOptions
 
 Represents the options passed to `open`.
 
@@ -155,5 +177,14 @@ Represents the options passed to `open`.
 | Prop         | Type                                      |
 | ------------ | ----------------------------------------- |
 | **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
+
+
+#### FtsCapacitorBrowserReturnOptions
+
+Represents the options passed to `open`.
+
+| Prop      | Type                | Description                            | Since |
+| --------- | ------------------- | -------------------------------------- | ----- |
+| **`url`** | <code>string</code> | The URL the browser was returned with. | 1.0.0 |
 
 </docgen-api>
