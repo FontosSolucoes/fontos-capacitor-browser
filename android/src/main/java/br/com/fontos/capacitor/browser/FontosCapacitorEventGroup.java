@@ -35,6 +35,7 @@ class FontosCapacitorEventGroup {
     }
 
     private void checkForCompletion() {
+    Log.d("checkForCompletion|count: " + count);
         if (count <= 0) {
             if (isComplete == false && completion != null) {
                 completion.onGroupCompletion();

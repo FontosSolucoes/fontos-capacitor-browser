@@ -1,7 +1,7 @@
 
   <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
-      <activity android:name=".BrowserControllerActivity"
+      <activity android:name=".FontosCapacitorBrowserControllerActivity"
         android:exported="false"
           android:theme="@android:style/Theme.Translucent.NoTitleBar"
           android:launchMode="singleTask"/>
@@ -12,4 +12,3 @@
       </intent>
     </queries>
   </manifest>
-  

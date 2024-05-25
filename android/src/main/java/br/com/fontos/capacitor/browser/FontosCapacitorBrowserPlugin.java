@@ -105,12 +105,16 @@ public class FontosCapacitorBrowserPlugin extends Plugin {
     }
 
     void onBrowserEvent(int event) {
+      Log.d("onBrowserEvent|"+event);
         switch (event) {
             case FontosCapacitorBrowser.BROWSER_LOADED:
                 notifyListeners("fontosBrowserPageLoaded", null);
                 break;
             case FontosCapacitorBrowser.BROWSER_FINISHED:
                 notifyListeners("fontosBrowserFinished", null);
+                break;
+            case FontosCapacitorBrowser.BROWSER_LOGGED_IN:
+                notifyListeners("fontosBrowserLoggedIn", null);
                 break;
         }
     }

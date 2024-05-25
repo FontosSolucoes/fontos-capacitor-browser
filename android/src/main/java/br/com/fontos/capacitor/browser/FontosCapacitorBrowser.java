@@ -33,6 +33,11 @@ public class FontosCapacitorBrowser {
      * Sent when the browser is finished.
      */
     public static final int BROWSER_FINISHED = 2;
+    /**
+     * Sent when the user logged.
+     */
+    public static final int BROWSER_LOGGED_IN = 3;
+
 
     // private properties
     @Nullable
@@ -134,6 +139,7 @@ public class FontosCapacitorBrowser {
     }
 
     private void handledNavigationEvent(int navigationEvent) {
+    Log.d("handledNavigationEvent");
         switch (navigationEvent) {
             case CustomTabsCallback.NAVIGATION_FINISHED:
                 if (isInitialLoad) {
@@ -173,6 +179,8 @@ public class FontosCapacitorBrowser {
                     new CustomTabsCallback() {
                         @Override
                         public void onNavigationEvent(int navigationEvent, Bundle extras) {
+                            Log.d("onNavigationEvent_1_|"+navigationEvent);
+                            Log.d("onNavigationEvent_2_|"+extras);
                             handledNavigationEvent(navigationEvent);
                         }
                     }
