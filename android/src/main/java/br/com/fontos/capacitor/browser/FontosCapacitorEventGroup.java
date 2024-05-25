@@ -1,5 +1,4 @@
 package br.com.fontos.capacitor.browser;
-
 /**
  * Simple class to handle indeterminate sequence of events. Not thread safe.
  */
@@ -35,7 +34,6 @@ class FontosCapacitorEventGroup {
     }
 
     private void checkForCompletion() {
-    Log.d("checkForCompletion|count: " + count);
         if (count <= 0) {
             if (isComplete == false && completion != null) {
                 completion.onGroupCompletion();

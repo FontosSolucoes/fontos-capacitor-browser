@@ -139,7 +139,6 @@ public class FontosCapacitorBrowser {
     }
 
     private void handledNavigationEvent(int navigationEvent) {
-    Log.d("handledNavigationEvent");
         switch (navigationEvent) {
             case CustomTabsCallback.NAVIGATION_FINISHED:
                 if (isInitialLoad) {
@@ -179,8 +178,6 @@ public class FontosCapacitorBrowser {
                     new CustomTabsCallback() {
                         @Override
                         public void onNavigationEvent(int navigationEvent, Bundle extras) {
-                            Log.d("onNavigationEvent_1_|"+navigationEvent);
-                            Log.d("onNavigationEvent_2_|"+extras);
                             handledNavigationEvent(navigationEvent);
                         }
                     }
