@@ -1,6 +1,6 @@
 {
   "name": "@fontossolucoes/fontos-capacitor-browser",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Fontos: Capacitor plugin to Open inAppBrowser",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
